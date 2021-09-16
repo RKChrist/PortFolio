@@ -24,9 +24,9 @@ namespace PortFolio.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        IHostingEnvironment _env;
+        IWebHostEnvironment _env;
 
-        public HomeController(ILogger<HomeController> logger, IHostingEnvironment env)
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment env)
         {
             _logger = logger;
             _env = env;
