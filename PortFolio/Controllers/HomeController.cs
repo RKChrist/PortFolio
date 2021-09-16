@@ -1,11 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PortFolio.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using static Humanizer.In;
+using System.Xml.Linq;
+using System.Runtime.InteropServices.ComTypes;
+using static System.Net.WebRequestMethods;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting;
 
 namespace PortFolio.Controllers
 {
@@ -14,10 +24,12 @@ namespace PortFolio.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        IHostingEnvironment _env;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHostingEnvironment env)
         {
             _logger = logger;
+            _env = env;
         }
         [Route("")]
         [Route("[action]")]
@@ -34,6 +46,21 @@ namespace PortFolio.Controllers
         public IActionResult AboutMe()
         {
             return View();
+        }
+        [Route("[action]")]
+        [HttpPost, ActionName("AboutMe")]
+        public  IActionResult DownloadCVAsync()
+        {
+            string fileName = "Files" + "\\" + "Rune-Kennet-Christensen-CV .docx";
+            var filepath = _env.ContentRootPath + "\\" + fileName;
+            var fileExists = System.IO.File.Exists(filepath);
+            if (fileExists)
+            {
+                var fs = System.IO.File.OpenRead(filepath);
+                return File(fs, "application/pdf", "Rune-Kennet-Christensen-CV - Danish.docx");
+            }
+            return View();
+        
         }
         [Route("[action]")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

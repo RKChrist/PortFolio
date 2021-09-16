@@ -579,7 +579,7 @@ button.primary_btn {
     overflow: hidden;
     width: 100%;
     min-height: 450px;
-    background: url(/Images/common-banner.png) no-repeat right bottom;
+    background: url('../Images/common-banner.png') no-repeat top center;
     background-size: cover;
     z-index: 1
 }
