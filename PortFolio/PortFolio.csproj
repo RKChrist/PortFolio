@@ -16,4 +16,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Languages\" />
+    <Folder Include="Views\Portfolio\" />
+  </ItemGroup>
+
 </Project>
